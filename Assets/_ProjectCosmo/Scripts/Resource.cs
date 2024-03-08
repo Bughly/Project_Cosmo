@@ -1,28 +1,36 @@
+using System;
 using UnityEngine;
 
-public class Resource : MonoBehaviour // Changed from Resources to Resource
+public class Resource : MonoBehaviour
 {
-    public int durability;
-    public int sizeMin;
-    public int sizeMax;
-    public float regenTime;
-    public int tier;
-    public ResourceType type;
+    public string resourceName = "Resource";
+    public int resourceAmount = 10;
+    public float gatherTime = 1f;
 
-    public Resource(int _durability, int _sizeMin, int _sizeMax, float _regenTime, int _tier, ResourceType _type)
+    private Inventory inventory;
+    [SerializeField] private GameObject player;
+
+    private void Start()
     {
-        durability = _durability;
-        sizeMin = _sizeMin;
-        sizeMax = _sizeMax;
-        regenTime = _regenTime;
-        tier = _tier;
-        type = _type;
+        inventory = player.GetComponent<Inventory>(); // Find the Inventory component in the scene
     }
-}
 
-public enum ResourceType
-{
-    Ore,
-    Wood,
-    Farm,
+    public void Gather()
+    {
+        Debug.Log("Function Gather");
+        // Play gathering animation, sound effects, etc.
+        // Deduct stamina/durability from player tool
+        
+        // Simulate gathering time with Invoke
+        Invoke("CompleteGathering", gatherTime);
+    }
+
+    public void CompleteGathering()
+    {
+        // Perform actions when gathering is complete
+        // For example, add the gathered resource to the player's inventory
+        inventory.AddItem(resourceName, resourceAmount);
+        // You can also destroy or disable the resource object
+        Debug.Log("Resource gathered!" + inventory.GetItemQuantity(resourceName));
+    }
 }
