@@ -5,6 +5,7 @@ public class ResourceGatherer : MonoBehaviour
     public float gatherRange = 2f;
     public LayerMask resourceLayer;
     public int gatherDamage = 5;
+    public bool isGathering = false;
 
     private Camera playerCamera;
 
@@ -30,16 +31,9 @@ public class ResourceGatherer : MonoBehaviour
 
     private bool InRange()
     {
-        // Cast a ray forward from the player to detect resources within gatherRange
-        
-        // RaycastHit hitCheck;
-        // if (Physics.Raycast(transform.position, transform.forward, out hitCheck, gatherRange, resourceLayer))
-        // {
-        //     Debug.Log("Checking");
-        //     return hitCheck.collider != null;
-        // }
+        // Cast a ray forward from the player's camera to detect resources within gatherRange
         RaycastHit hitCheck;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitCheck, gatherRange, resourceLayer))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitCheck, gatherRange, resourceLayer) && !isGathering)
         {
             Debug.Log("In Range, Gathering");
             return hitCheck.collider != null;
@@ -65,6 +59,7 @@ public class ResourceGatherer : MonoBehaviour
             {
                 Debug.Log("Resource component found.");
                 // Gather resource
+                isGathering = true;
                 resource.resourceHealth = resource.resourceHealth - gatherDamage;
                 Debug.Log(resource.resourceHealth);
                 resource.Gather();

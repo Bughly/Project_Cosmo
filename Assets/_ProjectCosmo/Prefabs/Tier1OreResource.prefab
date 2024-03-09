@@ -71,6 +71,8 @@ MonoBehaviour:
   resourceAmount: 1
   gatherTime: 1
   resourceHealth: 100
+  regenTime: 5
+  maxResourceHealth: 100
   player: {fileID: 0}
 --- !u!1 &6098259997024594145
 GameObject:
