@@ -1,14 +1,17 @@
-using System.Collections;
 using UnityEngine;
 
 public class ResourceGatherer : MonoBehaviour
 {
     public float gatherRange = 2f;
     public LayerMask resourceLayer;
+    public int gatherDamage = 5;
+
+    private Camera playerCamera;
 
     public void Awake()
     {
         resourceLayer = LayerMask.GetMask("Resource");
+        playerCamera = Camera.main;
     }
 
     private void Update()
@@ -18,6 +21,8 @@ public class ResourceGatherer : MonoBehaviour
         {
             GatherResources();
         }
+        
+        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * gatherRange, Color.green);
 
         // Vector3 forward = transform.TransformDirection(Vector3.forward);
         // Debug.DrawRay(transform.position, forward, Color.green);
@@ -26,10 +31,17 @@ public class ResourceGatherer : MonoBehaviour
     private bool InRange()
     {
         // Cast a ray forward from the player to detect resources within gatherRange
+        
+        // RaycastHit hitCheck;
+        // if (Physics.Raycast(transform.position, transform.forward, out hitCheck, gatherRange, resourceLayer))
+        // {
+        //     Debug.Log("Checking");
+        //     return hitCheck.collider != null;
+        // }
         RaycastHit hitCheck;
-        if (Physics.Raycast(transform.position, transform.forward, out hitCheck, gatherRange, resourceLayer))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitCheck, gatherRange, resourceLayer))
         {
-            Debug.Log("Checking");
+            Debug.Log("In Range, Gathering");
             return hitCheck.collider != null;
         }
 
@@ -43,7 +55,7 @@ public class ResourceGatherer : MonoBehaviour
 
         // Cast a ray forward from the player to detect resources within gatherRange
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, gatherRange, resourceLayer))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, gatherRange, resourceLayer))
         {
             Debug.Log("Raycast hit: " + hit.collider.gameObject.name); // Debug the name of the object hit
             Debug.DrawLine(transform.position, hit.point, Color.red, 1f); // Draw a red line from player to hit point
@@ -53,6 +65,8 @@ public class ResourceGatherer : MonoBehaviour
             {
                 Debug.Log("Resource component found.");
                 // Gather resource
+                resource.resourceHealth = resource.resourceHealth - gatherDamage;
+                Debug.Log(resource.resourceHealth);
                 resource.Gather();
             }
             else

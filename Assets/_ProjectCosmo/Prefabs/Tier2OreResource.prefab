@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2098332988012731707}
   - component: {fileID: 3359601638159911828}
   m_Layer: 15
-  m_Name: Tier1OreResource
+  m_Name: Tier2OreResource
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,10 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663b6d6facd26b640bc2f9e46bd1fcec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceName: Coal
-  resourceAmount: 1
-  gatherTime: 1
-  resourceHealth: 100
+  resourceName: Steel
+  resourceAmount: 2
+  gatherTime: 2
+  resourceHealth: 500
   player: {fileID: 0}
 --- !u!1 &6098259997024594145
 GameObject:
@@ -346,7 +346,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 191f7a4eb10e3c2489b0548b6df8b5f4, type: 2}
+  - {fileID: 2100000, guid: 25294e730b78f994d95840dee51b02a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

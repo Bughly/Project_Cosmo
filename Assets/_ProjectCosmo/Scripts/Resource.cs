@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Resource : MonoBehaviour
@@ -6,6 +5,7 @@ public class Resource : MonoBehaviour
     public string resourceName = "Resource";
     public int resourceAmount = 10;
     public float gatherTime = 1f;
+    public int resourceHealth = 100;
 
     private Inventory inventory;
     [SerializeField] private GameObject player;
@@ -17,6 +17,11 @@ public class Resource : MonoBehaviour
 
     public void Gather()
     {
+        if (resourceHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+        
         Debug.Log("Function Gather");
         // Play gathering animation, sound effects, etc.
         // Deduct stamina/durability from player tool
