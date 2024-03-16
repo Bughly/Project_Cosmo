@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class PlanetGravity : MonoBehaviour
+public class PlanetAtmosphere : MonoBehaviour
 {
-    public float newGravity = -5f;
+    [SerializeField] private float newGravity = -5f;
+    [SerializeField] private float oxygenAmount = 1f;
 
     private Rigidbody playerRigidbody;
     private Vector3 originalGravity;
@@ -22,6 +23,7 @@ public class PlanetGravity : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerStats.oxygenDegenRate = oxygenAmount;
             Physics.gravity = new Vector3(0, newGravity, 0);
             PlayerStats.isBreathing = false;
         }
