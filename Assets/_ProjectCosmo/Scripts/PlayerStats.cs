@@ -7,9 +7,9 @@ public class PlayerStats : MonoBehaviour
     public float playerOxygen = 100f;
     public float maxPlayerOxygen = 100f;
     public float minPlayerOxygen = 0;
-    public float oxygenRegenRate = 3f;
+    public static float oxygenRegenRate = 3f;
     public static float oxygenDegenRate = 0.5f;
-    public static bool isBreathing = true;
+    public static bool isBreathing = false;
     [Header("Stamina")]
     public float playerStamina = 100f;
     public float maxPlayerStamina = 100f;

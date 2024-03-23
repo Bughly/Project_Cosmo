@@ -16,7 +16,7 @@ public class PlanetAtmosphere : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Physics.gravity);
+        //Debug.Log(Physics.gravity);
     }
 
     private void OnTriggerEnter(Collider other)
